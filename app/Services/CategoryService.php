@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryService
 {
-  private $categoryRepository;
+  private CategoryRepository $categoryRepository;
 
   public function __construct(
     CategoryRepository $categoryRepository
