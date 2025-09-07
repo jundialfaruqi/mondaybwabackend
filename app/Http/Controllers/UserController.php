@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $fields = ['id', 'name', 'email', 'photo', 'phone'];
-        $users = $this->userService->getAll($fields ?: ['*']);
+        $users = $this->userService->getAll($fields);
         return response()->json(UserResource::collection($users));
     }
 
