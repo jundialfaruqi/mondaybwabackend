@@ -6,7 +6,6 @@ use App\Models\Category;
 
 class CategoryRepository
 {
-  // Implementasi repository untuk kategori
   public function getAll(array $fields)
   {
     return Category::select($fields)->latest()->paginate(10);

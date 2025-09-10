@@ -60,6 +60,7 @@ class TransactionRepository
         return Transaction::where('merchant_id', $merchantId)
             ->select(['*'])
             ->with(['merchant', 'transactionProducts.product'])
-            ->get();
+            ->latest()
+            ->paginate(10);
     }
 }
