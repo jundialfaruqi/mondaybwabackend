@@ -44,7 +44,7 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-        $product = $this->productService->create($request->validate());
+        $product = $this->productService->create($request->validated());
 
         return response()->json(new ProductResource($product), 201);
     }
@@ -52,7 +52,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, int $id)
     {
         try {
-            $product = $this->productService->update($id, $request->validate());
+            $product = $this->productService->update($id, $request->validated());
 
             return response()->json(new ProductResource($product));
         } catch (ModelNotFoundException $e) {
