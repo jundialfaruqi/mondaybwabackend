@@ -52,7 +52,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, int $id)
     {
         try {
-            $category = $this->categoryService->update($id, $request->validate());
+            $category = $this->categoryService->update($id, $request->validated());
 
             return response()->json(new CategoryResource($category));
         } catch (ModelNotFoundException $e) {
