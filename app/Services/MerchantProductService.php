@@ -60,7 +60,7 @@ class MerchantProductService
         [
           'warehouse_id' => $data['warehouse_id'],
           'merchant_id' => $data['merchant_id'],
-          'product_id' => $data['[product_id'],
+          'product_id' => $data['product_id'],
           'stock' => $data['stock']
         ]
       );
@@ -78,7 +78,7 @@ class MerchantProductService
         ]);
       }
 
-      if ($warehouseId) {
+      if (!$warehouseId) {
         throw ValidationException::withMessages([
           'warehouse_id' => ['Warehouse ID is required when increasing stock.']
         ]);

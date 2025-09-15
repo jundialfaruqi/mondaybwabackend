@@ -22,7 +22,7 @@ class MerchantProductController extends Controller
 
     public function store(MerchantProductRequest $request, int $merchant)
     {
-        $validated = $request->validate();
+        $validated = $request->validated();
 
         $validated['merchant_id'] = $merchant;
 
@@ -36,7 +36,7 @@ class MerchantProductController extends Controller
 
     public function update(MerchantProductUpdateRequest $request, int $merchantId, int $porductId)
     {
-        $validated = $request->validate();
+        $validated = $request->validated();
 
         $merchantProduct = $this->merchantProductService->updateStock(
             $merchantId,

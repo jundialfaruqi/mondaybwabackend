@@ -52,7 +52,7 @@ class MerchantController extends Controller
     public function update(MerchantRequest $request, int $id)
     {
         try {
-            $merchant = $this->merchantService->update($id, $request->validate());
+            $merchant = $this->merchantService->update($id, $request->validated());
 
             return response()->json(new MerchantResource($merchant));
         } catch (ModelNotFoundException $e) {

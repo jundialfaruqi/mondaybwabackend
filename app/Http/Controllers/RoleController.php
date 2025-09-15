@@ -32,13 +32,13 @@ class RoleController extends Controller
 
     public function store(RoleRequest $request)
     {
-        $role = $this->roleService->create($request->validate());
+        $role = $this->roleService->create($request->validated());
         return response()->json(new RoleResource($role), 201);
     }
 
     public function update(RoleRequest $request, int $id)
     {
-        $role = $this->roleService->update($id, $request->validate());
+        $role = $this->roleService->update($id, $request->validated());
         return response()->json(new RoleResource($role));
     }
 

@@ -22,7 +22,6 @@ class WarehouseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
             'name' => 'required|string|max:255|unique:warehouses,name,' . $this->route('warehouse'),
             'address' => 'required|string',
             'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',

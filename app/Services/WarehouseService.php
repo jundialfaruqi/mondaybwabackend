@@ -31,44 +31,35 @@ class WarehouseService
     if (isset($data['photo']) && $data['photo'] instanceof UploadedFile) {
       $data['photo'] = $this->uploadPhoto($data['photo']);
     }
-
     return $this->warehouseRepository->create($data);
   }
 
   public function update(int $id, array $data)
   {
     $fields = ['*'];
-
     $warehouse = $this->warehouseRepository->getById($id, $fields);
-
     if (isset($data['photo']) && $data['photo'] instanceof UploadedFile) {
       if (!empty($warehouse->photo)) {
         $this->deletePhoto($warehouse->photo);
       }
-
       $data['photo'] = $this->uploadPhoto($data['photo']);
     }
-
     return $this->warehouseRepository->update($id, $data);
   }
 
   public function delete(int $id)
   {
     $fields = ['*'];
-
     $warehouse = $this->warehouseRepository->getById($id, $fields);
-
     if ($warehouse->photo) {
       $this->deletePhoto($warehouse->photo);
     }
-
     $this->warehouseRepository->delete($id);
   }
 
   public function attachProduct(int $warehouseId, int $productId, int $stock)
   {
     $warehouse = $this->warehouseRepository->getById($warehouseId, ['id']);
-
     $warehouse->products()->syncWithoutDetaching([
       $productId => ['stock' => $stock],
     ]);
@@ -77,18 +68,15 @@ class WarehouseService
   public function detachProduct(int $warehouseId, int $productId)
   {
     $warehouse = $this->warehouseRepository->getById($warehouseId, ['id']);
-
     $warehouse->products()->detach($productId);
   }
 
   public function updateProductStock(int $warehouseId, int $productId, int $stock)
   {
     $warehouse = $this->warehouseRepository->getById($warehouseId, ['id']);
-
     $warehouse->products()->updateExistingPivot($productId, [
       'stock' => $stock,
     ]);
-
     return $warehouse->products()->where('product_id', $productId)->first();
   }
 
@@ -100,7 +88,6 @@ class WarehouseService
   private function deletePhoto(string $photoPath)
   {
     $relativePath = 'warehouses/' . basename($photoPath);
-
     if (Storage::disk('public')->exists($relativePath)) {
       Storage::disk('public')->delete($relativePath);
     }

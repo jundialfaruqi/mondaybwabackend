@@ -19,15 +19,12 @@ class WarehouseProductRepository
   public function updateStock(int $warehouseId, int $productId, int $stock): WarehouseProduct
   {
     $warehouseProduct = $this->getByWarehouseAndProduct($warehouseId, $productId);
-
     if (!$warehouseProduct) {
       throw ValidationException::withMessages([
         'product_id' => ['Product not found for this Warehouse']
       ]);
     }
-
     $warehouseProduct->update(['stock' => $stock]);
-
     return $warehouseProduct;
   }
 }

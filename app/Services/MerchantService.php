@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Merchant;
 use App\Repositories\MerchantRepository;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -70,7 +69,7 @@ class MerchantService
 
   private function uploadPhoto(UploadedFile $photo): string
   {
-    return Merchant::store('merchants', 'public');
+    return $photo->store('merchants', 'public');
   }
 
   private function deletePhoto(string $photoPath)

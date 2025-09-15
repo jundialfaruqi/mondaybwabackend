@@ -43,7 +43,7 @@ class WarehouseProductController extends Controller
         $warehouseProduct = $this->warehouseService->updateProductStock(
             $warehouseId,
             $productId,
-            $request->validate()['stock']
+            $request->validated()['stock']
         );
 
         return response()->json([
