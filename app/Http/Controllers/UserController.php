@@ -32,13 +32,13 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        $user = $this->userService->create($request->validate());
+        $user = $this->userService->create($request->validated());
         return response()->json(new UserResource($user), 201);
     }
 
     public function update(UserRequest $request, int $id)
     {
-        $user = $this->userService->update($id, $request->validate());
+        $user = $this->userService->update($id, $request->validated());
         return response()->json(new UserResource($user));
     }
 

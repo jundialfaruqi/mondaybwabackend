@@ -9,14 +9,14 @@ class Transaction extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['merchant_id', 'phone', 'sub_total', 'tax_total', 'grand_total', 'merchant_id'];
+    protected $fillable = ['name', 'merchant_id', 'phone', 'sub_total', 'tax_total', 'grand_total'];
 
     public function merchant()
     {
         return $this->belongsTo(Merchant::class);
     }
 
-    public function transactionProduct()
+    public function transactionProducts()
     {
         return $this->hasMany(TransactionProduct::class);
     }

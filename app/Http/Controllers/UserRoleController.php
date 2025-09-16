@@ -19,8 +19,8 @@ class UserRoleController extends Controller
     public function assignRole(UserRoleRequest $request)
     {
         $user = $this->userRoleService->assignRole(
-            $request->validate()['user_id'],
-            $request->validate()['role_id']
+            $request->validated()['user_id'],
+            $request->validated()['role_id']
         );
 
         return response()->json([
@@ -32,8 +32,8 @@ class UserRoleController extends Controller
     public function removeRole(UserRoleRequest $request)
     {
         $user = $this->userRoleService->removeRole(
-            $request->validate()['user_id'],
-            $request->validate()['role_id']
+            $request->validated()['user_id'],
+            $request->validated()['role_id']
         );
 
         return response()->json([

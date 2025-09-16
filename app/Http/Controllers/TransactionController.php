@@ -26,7 +26,7 @@ class TransactionController extends Controller
 
     public function store(TransactionRequest $request)
     {
-        $transaction = $this->transactionService->createTransaction($request->validate());
+        $transaction = $this->transactionService->createTransaction($request->validated());
 
         return response()->json([
             'message' => 'Transaction recorded succesfully',
@@ -51,8 +51,12 @@ class TransactionController extends Controller
     {
         $user = auth()->user();
 
-        if (!$user || $user->merchant) {
-            return response()->json(['message' => 'No Merchant assigned'], 404);
+        if (!$user) {
+            return response()->json(['message' => 'No auth available'], 401);
+        }
+
+        if (!$user->merchant) {
+            return response()->json(['message' => 'No Merchant assigned'], 403);
         }
 
         $merchantId = $user->merchant->id;

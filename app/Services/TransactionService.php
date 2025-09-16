@@ -70,11 +70,11 @@ class TransactionService
                 ]);
             }
 
-            $product = [];
+            $products = [];
 
             $subTotal = 0;
 
-            foreach ($product as $productData) {
+            foreach ($data['products'] as $productData) {
                 $merchantProduct = $this->merchantProductRepository->getByMerchantAndProduct(
                     $data['merchant_id'],
                     $productData['product_id']
@@ -98,7 +98,7 @@ class TransactionService
                 $productSubTotal = $productData['quantity'] * $price;
                 $subTotal += $productSubTotal;
 
-                $product[] = [
+                $products[] = [
                     'product_id' => $productData['product_id'],
                     'quantity' => $productData['quantity'],
                     'price' => $price,
@@ -126,7 +126,7 @@ class TransactionService
                 'grand_total' => $grandTotal,
             ]);
 
-            $this->transactionRepository->createTransactionProducts($transaction->id, $product);
+            $this->transactionRepository->createTransactionProducts($transaction->id, $products);
 
             return $transaction->fresh();
         });

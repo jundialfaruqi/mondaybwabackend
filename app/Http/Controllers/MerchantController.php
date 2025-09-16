@@ -80,6 +80,12 @@ class MerchantController extends Controller
     {
         $userId = Auth::id();
 
+        if (!$userId) {
+            return response()->json([
+                'message' => 'No auth available',
+            ], 401);
+        }
+
         try {
             $merchant = $this->merchantService->getKeeperById($userId);
 
