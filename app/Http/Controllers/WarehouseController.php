@@ -19,7 +19,7 @@ class WarehouseController extends Controller
 
     public function index()
     {
-        $fields = ['id', 'name', 'photo'];
+        $fields = ['id', 'name', 'photo', 'phone'];
 
         $warehouses = $this->warehouseService->getAll($fields ?: ['*']);
 
